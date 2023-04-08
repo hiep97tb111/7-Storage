@@ -40,11 +40,11 @@ class MainAct : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.tvTaskVideo).setOnClickListener {
-
+            startActivity(Intent(this, VideoAct::class.java))
         }
 
-        findViewById<TextView>(R.id.tvTaskPDF).setOnClickListener {
-
+        findViewById<TextView>(R.id.tvTaskDocument).setOnClickListener {
+            startActivity(Intent(this, DocumentAct::class.java))
         }
     }
 }

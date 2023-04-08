@@ -25,6 +25,10 @@
         </activity>
 
         <activity android:name=".ImageAct" android:exported="true"/>
+
+        <activity android:name=".VideoAct" android:exported="true"/>
+
+        <activity android:name=".DocumentAct" android:exported="true"/>
     </application>
 
 </manifest>
