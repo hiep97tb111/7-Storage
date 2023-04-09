@@ -11,7 +11,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.io.BufferedReader
 import java.io.IOException
+import java.io.InputStreamReader
 
 
 class DocumentAct: AppCompatActivity() {
@@ -19,6 +21,7 @@ class DocumentAct: AppCompatActivity() {
     private lateinit var pdfUri: Uri
     companion object {
         const val CREATE_FILE = 1
+        const val OPEN_PDF_FILE = 2
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +31,18 @@ class DocumentAct: AppCompatActivity() {
         findViewById<TextView>(R.id.tvCreateFile).setOnClickListener {
             handleCreateFilePDF()
         }
+
+        findViewById<TextView>(R.id.tvOpenFile).setOnClickListener {
+            handleOpenFilePDF()
+        }
+    }
+
+    private fun handleOpenFilePDF() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/pdf"
+        }
+        startActivityForResult(intent, OPEN_PDF_FILE)
     }
 
     private fun handleCreateFilePDF() {
@@ -68,6 +83,19 @@ class DocumentAct: AppCompatActivity() {
             } catch (e: IOException) {
                 e.printStackTrace()
             }
+        }else if(requestCode == OPEN_PDF_FILE && resultCode == RESULT_OK){
+            val uri = data!!.data
+            val inputStream = contentResolver.openInputStream(uri!!)
+            val bufferedReader = BufferedReader(InputStreamReader(inputStream, "UTF-8")) // specify UTF-8 encoding
+            val stringBuilder = StringBuilder()
+            var line: String? = bufferedReader.readLine()
+            while (line != null) {
+                stringBuilder.append(line)
+                line = bufferedReader.readLine()
+            }
+            inputStream?.close()
+            val documentContents = stringBuilder.toString()
+            Log.e("Logger DocumentContents", documentContents)
         }
     }
 }

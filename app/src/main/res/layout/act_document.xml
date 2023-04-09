@@ -16,4 +16,17 @@
         android:background="@android:color/holo_orange_dark"
         android:textStyle="bold"/>
 
+    <TextView
+        android:id="@+id/tvOpenFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/open_a_file"
+        app:layout_constraintTop_toBottomOf="@id/tvCreateFile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="20dp"
+        android:background="@android:color/holo_green_dark"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

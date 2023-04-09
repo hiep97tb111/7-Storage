@@ -6,4 +6,5 @@
     <string name="create_folder_in_directory_documents">Create Folder in DIRECTORY_DOCUMENTS</string>
     <string name="when_capture_image_finish_then_show_app_and_save_directory_documents">When capture image finish then show app and save DIRECTORY_DOCUMENTS</string>
     <string name="create_new_file">Create new File</string>
+    <string name="open_a_file">Open a File</string>
 </resources>
