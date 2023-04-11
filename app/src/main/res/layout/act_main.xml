@@ -21,26 +21,13 @@
         android:textStyle="bold"/>
 
   <TextView
-      android:id="@+id/tvTaskVideo"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:padding="20dp"
-      android:text="@string/task_video"
-      android:background="@android:color/holo_red_dark"
-      app:layout_constraintTop_toBottomOf="@id/tvTaskImage"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      android:layout_marginTop="20dp"
-      android:textStyle="bold"/>
-
-  <TextView
       android:id="@+id/tvTaskDocument"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:padding="20dp"
       android:text="Task Document"
       android:background="@android:color/holo_blue_dark"
-      app:layout_constraintTop_toBottomOf="@id/tvTaskVideo"
+      app:layout_constraintTop_toBottomOf="@id/tvTaskImage"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       android:layout_marginTop="20dp"

@@ -39,10 +39,6 @@ class MainAct : AppCompatActivity() {
             startActivity(Intent(this, ImageAct::class.java))
         }
 
-        findViewById<TextView>(R.id.tvTaskVideo).setOnClickListener {
-            startActivity(Intent(this, VideoAct::class.java))
-        }
-
         findViewById<TextView>(R.id.tvTaskDocument).setOnClickListener {
             startActivity(Intent(this, DocumentAct::class.java))
         }

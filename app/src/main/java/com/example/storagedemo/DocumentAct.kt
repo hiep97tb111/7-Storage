@@ -90,7 +90,7 @@ class DocumentAct: AppCompatActivity() {
             val stringBuilder = StringBuilder()
             var line: String? = bufferedReader.readLine()
             while (line != null) {
-                stringBuilder.append(line)
+                 stringBuilder.append(line)
                 line = bufferedReader.readLine()
             }
             inputStream?.close()

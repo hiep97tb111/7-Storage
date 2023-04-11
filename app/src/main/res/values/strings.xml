@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">StorageDemo</string>
-    <string name="task_image">Task Image</string>
-    <string name="task_video">Task Video</string>
+    <string name="task_image">Task Image/Video</string>
     <string name="task_pdf">Task PDF</string>
     <string name="create_folder_in_directory_documents">Create Folder in DIRECTORY_DOCUMENTS</string>
     <string name="when_capture_image_finish_then_show_app_and_save_directory_documents">When capture image finish then show app and save DIRECTORY_DOCUMENTS</string>
