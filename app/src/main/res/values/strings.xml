@@ -7,4 +7,5 @@
     <string name="create_new_file">Create new File</string>
     <string name="open_a_file">Open a File</string>
     <string name="get_single_image">Get Single Image Using MediaStore</string>
+    <string name="get_single_image_using_photopicker">Get Single Image Using PhotoPicker</string>
 </resources>

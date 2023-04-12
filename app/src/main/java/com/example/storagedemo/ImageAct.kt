@@ -24,6 +24,7 @@ import java.io.OutputStream
 class ImageAct : AppCompatActivity() {
     private lateinit var imvCaptureImage: ImageView
     private lateinit var imvGetSingleImageUsingMediaStore: ImageView
+    private lateinit var imvGetSingleImageUsingPhotoPicker: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,20 @@ class ImageAct : AppCompatActivity() {
 
         imvCaptureImage = findViewById(R.id.imvCaptureImage)
         imvGetSingleImageUsingMediaStore = findViewById(R.id.imvGetSingleImageUsingMediaStore)
+        imvGetSingleImageUsingPhotoPicker = findViewById(R.id.imvGetSingleImageUsingPhotoPicker)
+
+        // Registers a photo picker activity launcher in single-select mode.
+        // Not working when pickMedia in OnClickListener because happen error: LifecycleOwners must call register before they are STARTED
+        val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            // Callback is invoked after the user selects a media item or closes the
+            // photo picker.
+            if (uri != null) {
+                Log.d("Logger", "Selected URI: $uri")
+                imvGetSingleImageUsingPhotoPicker.setImageURI(uri)
+            } else {
+                Log.d("Logger", "No media selected")
+            }
+        }
 
         findViewById<TextView>(R.id.tvCreateFolder).setOnClickListener {
             handleCreateFolder()
@@ -50,6 +65,15 @@ class ImageAct : AppCompatActivity() {
             handleGetImageUsingMediaStore()
         }
 
+        findViewById<TextView>(R.id.tvGetSingleImageUsingPhotoPicker).setOnClickListener {
+            handleGetSingleImageUsingPhotoPicker(pickMedia)
+        }
+
+    }
+
+    private fun handleGetSingleImageUsingPhotoPicker(pickMedia: ActivityResultLauncher<PickVisualMediaRequest>) {
+        // Launch the photo picker and allow the user to choose images and videos.
+        pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
     }
 
     private fun handleGetImageUsingMediaStore() {
@@ -106,6 +130,7 @@ class ImageAct : AppCompatActivity() {
     ) { result: ActivityResult ->
         //  you will get result here in result.data
         if (result.resultCode == Activity.RESULT_OK) {
+            Log.d("Logger", result.data!!.data.toString())
             imvGetSingleImageUsingMediaStore.setImageURI(result.data!!.data)
         }
     }
