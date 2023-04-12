@@ -25,6 +25,8 @@ class ImageAct : AppCompatActivity() {
     private lateinit var imvCaptureImage: ImageView
     private lateinit var imvGetSingleImageUsingMediaStore: ImageView
     private lateinit var imvGetSingleImageUsingPhotoPicker: ImageView
+    private lateinit var imvGetMultipleImageUsingPhotoPickerOne: ImageView
+    private lateinit var imvGetMultipleImageUsingPhotoPickerTwo: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,8 @@ class ImageAct : AppCompatActivity() {
         imvCaptureImage = findViewById(R.id.imvCaptureImage)
         imvGetSingleImageUsingMediaStore = findViewById(R.id.imvGetSingleImageUsingMediaStore)
         imvGetSingleImageUsingPhotoPicker = findViewById(R.id.imvGetSingleImageUsingPhotoPicker)
+        imvGetMultipleImageUsingPhotoPickerOne = findViewById(R.id.imvGetMultipleImageUsingPhotoPickerOne)
+        imvGetMultipleImageUsingPhotoPickerTwo = findViewById(R.id.imvGetMultipleImageUsingPhotoPickerTwo)
 
         // Registers a photo picker activity launcher in single-select mode.
         // Not working when pickMedia in OnClickListener because happen error: LifecycleOwners must call register before they are STARTED
@@ -51,6 +55,21 @@ class ImageAct : AppCompatActivity() {
                 Log.d("Logger", "No media selected")
             }
         }
+
+        // Registers a photo picker activity launcher in multi-select mode.
+        // In this example, the app allows the user to select up to 5 media files.
+        val pickMultipleMedia =
+            registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia(5)) { uris ->
+                // Callback is invoked after the user selects media items or closes the
+                // photo picker.
+                if (uris.isNotEmpty()) {
+                    Log.d("PhotoPicker", "Number of items selected: ${uris.size}")
+                    imvGetMultipleImageUsingPhotoPickerOne.setImageURI(uris[0])
+                    imvGetMultipleImageUsingPhotoPickerTwo.setImageURI(uris[1])
+                } else {
+                    Log.d("PhotoPicker", "No media selected")
+                }
+            }
 
         findViewById<TextView>(R.id.tvCreateFolder).setOnClickListener {
             handleCreateFolder()
@@ -69,6 +88,14 @@ class ImageAct : AppCompatActivity() {
             handleGetSingleImageUsingPhotoPicker(pickMedia)
         }
 
+        findViewById<TextView>(R.id.tvGetMultipleImageUsingPhotoPicker).setOnClickListener {
+            handleGetMultipleImageUsingPhotoPicker(pickMultipleMedia)
+        }
+
+    }
+
+    private fun handleGetMultipleImageUsingPhotoPicker(pickMultipleMedia: ActivityResultLauncher<PickVisualMediaRequest>) {
+        pickMultipleMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageAndVideo))
     }
 
     private fun handleGetSingleImageUsingPhotoPicker(pickMedia: ActivityResultLauncher<PickVisualMediaRequest>) {

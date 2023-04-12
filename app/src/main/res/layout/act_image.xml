@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -77,5 +78,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvGetSingleImageUsingPhotoPicker"/>
+
+    <TextView
+        android:id="@+id/tvGetMultipleImageUsingPhotoPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Multiple Image Using PhotoPicker"
+        app:layout_constraintTop_toBottomOf="@id/imvGetSingleImageUsingPhotoPicker"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="20dp"
+        android:background="@android:color/holo_blue_light"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/imvGetMultipleImageUsingPhotoPickerOne"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imvGetMultipleImageUsingPhotoPickerTwo"
+        app:layout_constraintTop_toBottomOf="@id/tvGetMultipleImageUsingPhotoPicker"/>
+
+    <ImageView
+        android:id="@+id/imvGetMultipleImageUsingPhotoPickerTwo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toEndOf="@id/imvGetMultipleImageUsingPhotoPickerOne"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGetMultipleImageUsingPhotoPicker"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
