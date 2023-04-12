@@ -1,6 +1,8 @@
 package com.example.storagedemo
 
 import android.app.Activity
+import android.app.DownloadManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -93,8 +95,25 @@ class ImageAct : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.tvDownloadImage).setOnClickListener {
-            
+            handleDownloadImage()
         }
+
+    }
+
+    private fun handleDownloadImage() {
+        // require URL of Image & using DownloadManager 
+        val imageUrl = "https://play-lh.googleusercontent.com/WNYUy5Hlma6DgvtP7NJEWtQIT0nEyYbfuLWiU8ZAr7O5IEa_R50_jVtOtknvl4cHJSk"
+
+        val request = DownloadManager.Request(Uri.parse(imageUrl))
+        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
+            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "myImage.jpg")
+            .setTitle("Downloading image")
+            .setDescription("Please wait...")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            .setMimeType("image/jpeg")
+
+        val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        val downloadId = downloadManager.enqueue(request)
 
     }
 
