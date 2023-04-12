@@ -92,6 +92,10 @@ class ImageAct : AppCompatActivity() {
             handleGetMultipleImageUsingPhotoPicker(pickMultipleMedia)
         }
 
+        findViewById<TextView>(R.id.tvDownloadImage).setOnClickListener {
+            
+        }
+
     }
 
     private fun handleGetMultipleImageUsingPhotoPicker(pickMultipleMedia: ActivityResultLauncher<PickVisualMediaRequest>) {
