@@ -38,4 +38,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvCaptureImage"/>
 
+    <TextView
+        android:id="@+id/tvGetSingleImageUsingMediaStore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/get_single_image"
+        app:layout_constraintTop_toBottomOf="@id/imvCaptureImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="20dp"
+        android:background="@android:color/holo_green_light"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/imvGetSingleImageUsingMediaStore"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGetSingleImageUsingMediaStore"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

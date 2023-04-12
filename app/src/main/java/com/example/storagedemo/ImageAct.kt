@@ -13,6 +13,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import java.io.File
@@ -21,6 +23,7 @@ import java.io.OutputStream
 
 class ImageAct : AppCompatActivity() {
     private lateinit var imvCaptureImage: ImageView
+    private lateinit var imvGetSingleImageUsingMediaStore: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +35,7 @@ class ImageAct : AppCompatActivity() {
     private fun initViews() {
 
         imvCaptureImage = findViewById(R.id.imvCaptureImage)
+        imvGetSingleImageUsingMediaStore = findViewById(R.id.imvGetSingleImageUsingMediaStore)
 
         findViewById<TextView>(R.id.tvCreateFolder).setOnClickListener {
             handleCreateFolder()
@@ -41,7 +45,18 @@ class ImageAct : AppCompatActivity() {
             handleCaptureImage()
         }
 
+
+        findViewById<TextView>(R.id.tvGetSingleImageUsingMediaStore).setOnClickListener {
+            handleGetImageUsingMediaStore()
+        }
+
     }
+
+    private fun handleGetImageUsingMediaStore() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startForResultGetImageUsingMediaStore.launch(intent)
+    }
+
 
     private fun handleCaptureImage() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -78,11 +93,20 @@ class ImageAct : AppCompatActivity() {
             outputStream.close()
 
             // Show image in app use Bitmap
-//            imvCaptureImage.setImageBitmap(imageBitmap)
+            // imvCaptureImage.setImageBitmap(imageBitmap)
 
             // Show image in app use Uri
             Log.e("Logger", Environment.getExternalStoragePublicDirectory(DIRECTORY_DOCUMENTS).path+"/${pathNameFolder}/${nameImage}")
             imvCaptureImage.setImageURI(Uri.parse(Environment.getExternalStoragePublicDirectory(DIRECTORY_DOCUMENTS).path+"/${pathNameFolder}/${nameImage}"))
+        }
+    }
+
+    private val startForResultGetImageUsingMediaStore = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        //  you will get result here in result.data
+        if (result.resultCode == Activity.RESULT_OK) {
+            imvGetSingleImageUsingMediaStore.setImageURI(result.data!!.data)
         }
     }
 }
